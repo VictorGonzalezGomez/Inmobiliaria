@@ -32,14 +32,22 @@ function renderAllApartment() {
 renderAllApartment();
 //*******aplicando el filtro segun los parametros del usuario*******
 const button = document.getElementById("filtre");
-button.addEventListener("click", () =>{
+button.addEventListener("click", () => {
   //*******captura de valores ingresados por el usuario para ser utilizados en el filtro de propiedades*******
   let rooms = document.getElementById("rooms").value;
   let minDimension = document.getElementById("minDimension").value;
   let maxDimension = document.getElementById("maxDimension").value;
-// *******validacion de que todos los parametros de busqueda hayan sido ingresados*******
+  //*******validacion de que todos los parametros de busqueda hayan sido ingresados correctamente*******
   if (isEmpty(rooms) || isEmpty(minDimension) || isEmpty(maxDimension)) {
     alert("todos los campos son obligatorios");
+    return;
+  } else if (minDimension > maxDimension) {
+    alert(
+      "verificar en en metros cuadrados 'desde' sea menor a 'hasta' valores ingresado sean validos"
+    );
+    return;
+  } else if (minDimension < 0 || maxDimension < 0) {
+    alert("valor ingresado no valido, ingrese un valor positivo");
     return;
   }
   //*******limpiado de contenedor de cards para insertar los nuevos elementos*******
